@@ -1,6 +1,7 @@
 "use strict"
 
 const Hapi = require("@hapi/hapi")
+const routes = require("./routes")
 
 const init = async () => {
   const server = Hapi.server({
@@ -8,20 +9,7 @@ const init = async () => {
     host: "localhost",
   })
 
-  server.route({
-    method: "GET",
-    path: "/routes",
-    handler: (request, h) => {
-      const data = {
-        payload: {
-          nama: "Nanang",
-          usia: 40,
-          alamat: "Jonggol",
-        },
-      }
-      return data
-    },
-  })
+  server.route(routes)
 
   await server.start()
   console.log("Server running on %s", server.info.uri)
